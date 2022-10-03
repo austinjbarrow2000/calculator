@@ -1,0 +1,48 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+#calculator {
+    width: 40%;
+}
+
+#buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    border: 5px black solid;
+    background-color: lightblue;
+    padding: 20px;
+
+}
+
+div > button {
+    aspect-ratio: 1/1;
+    background-color: white;
+    font-size: larger;
+    font-weight: 800;
+}
+
+.operand {
+    background-color: yellow;
+}
+
+#display {
+    background-color: gray;
+    height:15%;
+    border: 5px black solid;
+    border-bottom: 0px;
+
+    text-align: right;
+    color: lightgray;
+    font-size: 8vw;
+    font-weight: 800;
+    padding: 10px;
+    padding-bottom: 25px;
+    padding-right: 20px;
+}
+
+.special {
+    background-color: lightcoral;
+}
