@@ -41,7 +41,10 @@ operands.forEach(operand => operand.addEventListener('click', function(e) {
 }));
 
 equals.addEventListener('click', function(e) {
-    secondValue = parseInt(calculatorDisplayValue);
+    if(calculatorDisplayValue !== '') {
+        secondValue = parseInt(calculatorDisplayValue);
+    }
+    
     if(firstValue === '' || secondValue === '' || selectedOperand === '') {
         return;
     }
