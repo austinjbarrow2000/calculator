@@ -17,11 +17,15 @@ const clear = document.getElementById("C");
 
 
 numbers.forEach(number => number.addEventListener('click', function(e) {
+    if(calculatorDisplayValue === "STOP IT!") { return };
+    
     calculatorDisplayValue = Number(calculatorDisplayValue + e.target.innerText);
     updateDisplay();
 }));
 
 operands.forEach(operand => operand.addEventListener('click', function(e) {
+    if(calculatorDisplayValue == "STOP IT!") { return };
+
     if(firstValue === '') {
         firstValue = calculatorDisplayValue;
         calculatorDisplayValue = '';
@@ -36,24 +40,31 @@ operands.forEach(operand => operand.addEventListener('click', function(e) {
         selectedOperand = e.target.innerText;
         firstValue = calculatorDisplayValue;
         secondValue = '';
-        calculatorDisplayValue = '';
+        if(calculatorDisplayValue !== "STOP IT!") { 
+            calculatorDisplayValue = '';
+        }
     }
 }));
 
 equals.addEventListener('click', function(e) {
+    if(calculatorDisplayValue == "STOP IT!") { return };
+
     if(calculatorDisplayValue !== '') {
         secondValue = parseInt(calculatorDisplayValue);
     }
-    
+
     if(firstValue === '' || secondValue === '' || selectedOperand === '') {
         return;
     }
     calculatorDisplayValue = operate(selectedOperand, Number(firstValue), Number(secondValue));
     updateDisplay();
     firstValue = calculatorDisplayValue;
-    calculatorDisplayValue = '';
+    if(calculatorDisplayValue !== "STOP IT!") { 
+        calculatorDisplayValue = '';
+    }
     selectedOperand = '';
     secondValue = '';
+
 });
 
 clear.addEventListener('click', function(e) {
@@ -76,7 +87,15 @@ function updateDisplay() {
 function add(a,b) { return a + b; }
 function subtract(a,b) { return a - b; }
 function multiply(a,b) { return a * b; }
-function divide(a,b) { return a / b; }
+function divide(a,b) { 
+    if(b === 0) {
+        firstValue = '';
+        selectedOperand = '';
+        secondValue = '';
+        return "STOP IT!"
+    }
+    return a / b; 
+}
 
 function operate(operand, a, b) {
     switch(operand) {
